@@ -1,0 +1,74 @@
+# model
+base_model: thehosy/TheSyx-nano-Init
+model_type: AutoModelForCausalLM
+tokenizer_type: AutoTokenizer
+
+# loading
+load_in_8bit: false
+load_in_4bit: false
+strict: false
+bf16: true
+fp16:
+tf32: true
+
+unfrozen_parameters:
+  - model.layers.*
+  - model.norm.weight
+
+pretraining_dataset:
+  - name: ds1
+    path: duongttr/vi-dataset-for-pretrain
+    split: train
+    text_column: text
+    type: pretrain
+    trust_remote_code: true
+    skip: # number of rows of data to skip over from the beginning
+
+val_set_size: 0
+shuffle_merged_datasets: true
+
+max_steps: 20000
+
+sequence_len: 4096
+sample_packing: true
+pad_to_sequence_len: true
+
+output_dir: /pretraining/output
+
+save_safetensors: true
+
+gradient_accumulation_steps: 1
+micro_batch_size: 8
+num_epochs: 1
+optimizer: adamw_torch
+lr_scheduler: cosine
+learning_rate: 1e-4
+
+train_on_inputs: false
+group_by_length: false
+
+gradient_checkpointing: false
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+early_stopping_patience:
+
+local_rank:
+logging_steps: 50
+xformers_attention:
+flash_attention: true
+
+use_tensorboard: true
+
+resume_from_checkpoint: /mnt/data/work/llm/hsthe/LLM/pretraining/output/checkpoint-37265
+auto_resume_from_checkpoints: true
+
+warmup_ratio: 0.05
+evals_per_epoch: 0
+saves_per_epoch: 50
+save_total_limit: 3
+weight_decay: 0.0
+
+hub_model_id: thehosy/Thesyx-Nano-Base
+
+# special_tokens:
+#   pad_token: "<|im_end|>"
