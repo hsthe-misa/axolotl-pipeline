@@ -16,8 +16,7 @@ unfrozen_parameters:
   - model.norm.weight
 
 pretraining_dataset:
-  - name: ds1
-    path: duongttr/vi-dataset-for-pretrain
+  - path: duongttr/vi-dataset-for-pretrain
     split: train
     text_column: text
     type: pretrain
