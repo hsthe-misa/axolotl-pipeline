@@ -58,7 +58,7 @@ flash_attention: true
 
 use_tensorboard: true
 
-resume_from_checkpoint: /mnt/data/work/llm/hsthe/LLM/pretraining/output/checkpoint-37265
+resume_from_checkpoint: 
 auto_resume_from_checkpoints: true
 
 warmup_ratio: 0.05
