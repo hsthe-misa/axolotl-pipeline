@@ -16,9 +16,9 @@ unfrozen_parameters:
   - model.norm.weight
 
 pretraining_dataset:
-  - path: duongttr/vi-dataset-for-pretrain
+  - path: vietgpt/news_summarization_vi  # duongttr/vi-dataset-for-pretrain
     split: train
-    text_column: text
+    text_column: content
     type: pretrain
     trust_remote_code: true
     skip: # number of rows of data to skip over from the beginning
