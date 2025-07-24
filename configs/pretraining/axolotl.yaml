@@ -17,7 +17,7 @@ unfrozen_parameters:
 datasets:
   - path: vietgpt/news_summarization_vi  # duongttr/vi-dataset-for-pretrain
     split: train
-    text_column: content
+    field: content
     type: completion
     trust_remote_code: true
     streaming: true
