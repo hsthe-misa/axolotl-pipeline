@@ -8,20 +8,19 @@ load_in_8bit: false
 load_in_4bit: false
 strict: false
 bf16: true
-fp16:
 tf32: true
 
 unfrozen_parameters:
   - model.layers.*
   - model.norm.weight
 
-pretraining_dataset:
+datasets:
   - path: vietgpt/news_summarization_vi  # duongttr/vi-dataset-for-pretrain
     split: train
     text_column: content
-    type: pretrain
+    type: completion
     trust_remote_code: true
-    skip: # number of rows of data to skip over from the beginning
+    streaming: true
 
 val_set_size: 0
 shuffle_merged_datasets: true
@@ -68,6 +67,20 @@ save_total_limit: 3
 weight_decay: 0.0
 
 hub_model_id: thehosy/Thesyx-Nano-Base
+
+fsdp:
+  - full_shard
+  - auto_wrap
+fsdp_config:
+  fsdp_sharding_strategy: 1
+  fsdp_auto_wrap_policy: TRANSFORMER_BASED_WRAP
+  fsdp_transformer_layer_cls_to_wrap: Qwen3MoeDecoderLayer
+  fsdp_state_dict_type: FULL_STATE_DICT
+  fsdp_backward_prefetch: BACKWARD_PRE
+  fsdp_sync_module_states: true
+  fsdp_cpu_ram_efficient_loading: true
+  fsdp_use_orig_params: false
+  fsdp_offload_params: false
 
 # special_tokens:
 #   pad_token: "<|im_end|>"
