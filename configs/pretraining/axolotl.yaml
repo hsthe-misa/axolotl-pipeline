@@ -79,7 +79,7 @@ fsdp_config:
   fsdp_backward_prefetch: BACKWARD_PRE
   fsdp_sync_module_states: true
   fsdp_cpu_ram_efficient_loading: true
-  fsdp_use_orig_params: false
+  fsdp_use_orig_params: true
   fsdp_offload_params: false
 
 # special_tokens:
