@@ -68,19 +68,28 @@ weight_decay: 0.0
 
 hub_model_id: thehosy/Thesyx-Nano-Base
 
-fsdp:
-  - full_shard
-  - auto_wrap
+# fsdp:
+#   - full_shard
+#   - auto_wrap
+# fsdp_config:
+#   fsdp_sharding_strategy: 1
+#   fsdp_auto_wrap_policy: TRANSFORMER_BASED_WRAP
+#   fsdp_transformer_layer_cls_to_wrap: Qwen3MoeDecoderLayer
+#   fsdp_state_dict_type: FULL_STATE_DICT
+#   fsdp_backward_prefetch: BACKWARD_PRE
+#   fsdp_sync_module_states: true
+#   fsdp_cpu_ram_efficient_loading: true
+#   fsdp_use_orig_params: true
+#   fsdp_offload_params: false
+
+fsdp_version: 2
 fsdp_config:
-  fsdp_sharding_strategy: 1
-  fsdp_auto_wrap_policy: TRANSFORMER_BASED_WRAP
-  fsdp_transformer_layer_cls_to_wrap: Qwen3MoeDecoderLayer
-  fsdp_state_dict_type: FULL_STATE_DICT
-  fsdp_backward_prefetch: BACKWARD_PRE
-  fsdp_sync_module_states: true
-  fsdp_cpu_ram_efficient_loading: true
-  fsdp_use_orig_params: true
-  fsdp_offload_params: false
+  offload_params: false
+  cpu_ram_efficient_loading: true
+  auto_wrap_policy: TRANSFORMER_BASED_WRAP
+  transformer_layer_cls_to_wrap: Qwen3MoeDecoderLayer
+  state_dict_type: FULL_STATE_DICT
+  reshard_after_forward: true
 
 # special_tokens:
 #   pad_token: "<|im_end|>"
