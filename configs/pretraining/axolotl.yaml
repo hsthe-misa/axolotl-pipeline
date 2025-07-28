@@ -31,7 +31,7 @@ sequence_len: 4096
 sample_packing: false
 pad_to_sequence_len: true
 
-output_dir: /dev/shm/pretraining/output
+output_dir: ./pretraining/output
 
 save_safetensors: true
 
@@ -97,14 +97,14 @@ accelerator_config:
 #   fsdp_use_orig_params: true
 #   fsdp_offload_params: false
 
-# fsdp_version: 2
-# fsdp_config:
-#   offload_params: false
-#   cpu_ram_efficient_loading: true
-#   auto_wrap_policy: TRANSFORMER_BASED_WRAP
-#   transformer_layer_cls_to_wrap: Qwen3MoeDecoderLayer
-#   state_dict_type: FULL_STATE_DICT
-#   reshard_after_forward: true
+fsdp_version: 2
+fsdp_config:
+  offload_params: false
+  cpu_ram_efficient_loading: true
+  auto_wrap_policy: TRANSFORMER_BASED_WRAP
+  transformer_layer_cls_to_wrap: Qwen3MoeDecoderLayer
+  state_dict_type: FULL_STATE_DICT
+  reshard_after_forward: true
 
 # special_tokens:
 #   pad_token: "<|im_end|>"
